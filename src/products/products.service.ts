@@ -11,8 +11,13 @@ export class ProductsService {
   private denormalize(products) {
     return products.map((product: Product) => {
       const newProduct: any = { ...product };
-      newProduct.sku = product.code;
+      newProduct.sku = 'sku:' + product.code;
       delete newProduct.code;
+      newProduct.abstract = product.summary;
+      delete newProduct.description;
+      delete newProduct.summary;
+      delete newProduct.configurable;
+      delete newProduct.multidimensional;
       return newProduct;
     });
   }
